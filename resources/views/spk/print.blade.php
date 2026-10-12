@@ -181,7 +181,7 @@
                         <td class="p-2 border-r-2 border-black font-sans">{{ $alt->name }}</td>
                         @foreach($criterias as $crit)
                             <td class="p-2 border-r-2 border-black text-center">
-                                {{ number_format($sawData['matrix_r'][$alt->id]['r'][$crit->id] ?? 0, 4) }}
+                                {{ number_format($sawData['matrix_r'][$alt->id]['r'][$crit->id] ?? 0, 2) }}
                             </td>
                         @endforeach
                     </tr>

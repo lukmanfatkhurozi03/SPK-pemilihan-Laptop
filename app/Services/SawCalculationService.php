@@ -119,19 +119,19 @@ class SawCalculationService
 
                 if ($crit->isBenefit()) {
                     if ($target > 0) {
-                        $r = $x / $target;
-                        $formula = "{$x} / {$target} = " . round($r, 4);
+                        $r = round($x / $target, 2);
+                        $formula = "{$x} / {$target} = " . number_format($r, 2);
                     } else {
-                        $r = 0;
+                        $r = 0.0;
                         $formula = "{$x} / 0 = 0";
                     }
                 } else {
                     // Cost criteria
                     if ($x > 0) {
-                        $r = $target / $x;
-                        $formula = "{$target} / {$x} = " . round($r, 4);
+                        $r = round($target / $x, 2);
+                        $formula = "{$target} / {$x} = " . number_format($r, 2);
                     } else {
-                        $r = 0;
+                        $r = 0.0;
                         $formula = "{$target} / 0 = 0";
                     }
                 }
@@ -160,18 +160,24 @@ class SawCalculationService
             $matrixR[$altId] = $rowR;
             $matrixWeighted[$altId] = $rowWeighted;
 
+            $preferenceScoreRounded = round($preferenceScore, 3);
+
             $scoresSummary[$altId] = [
                 'alternative' => $alt,
-                'preference_score' => $preferenceScore,
-                'preference_formatted' => number_format($preferenceScore, 4),
-                'percentage' => round($preferenceScore * 100, 2),
+                'preference_score' => $preferenceScoreRounded,
+                'preference_formatted' => number_format($preferenceScoreRounded, 3),
+                'percentage' => round($preferenceScoreRounded * 100, 2),
                 'breakdown' => $criteriaBreakdown,
             ];
         }
 
         // 4. Perangkingan
         uasort($scoresSummary, function ($a, $b) {
-            return $b['preference_score'] <=> $a['preference_score'];
+            $cmp = $b['preference_score'] <=> $a['preference_score'];
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+            return ($a['alternative']->order ?? 0) <=> ($b['alternative']->order ?? 0);
         });
 
         $rankedResults = [];

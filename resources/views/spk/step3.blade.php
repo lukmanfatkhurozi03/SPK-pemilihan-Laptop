@@ -382,6 +382,11 @@
                         padding: 10,
                         borderColor: '#000000',
                         borderWidth: 2,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Nilai Preferensi (V): ' + Number(context.raw).toFixed(3);
+                            }
+                        }
                     }
                 },
                 scales: {

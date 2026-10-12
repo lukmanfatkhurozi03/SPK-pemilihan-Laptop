@@ -82,44 +82,40 @@
 
         <!-- Right: Actions based on active tab -->
         <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
-            <template x-if="activeTabStep1 === 'alternatives'">
-                <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
-                    <!-- Toggle View Mode: Grid Cards vs Table -->
-                    <div class="hidden sm:flex items-center border-2 border-black bg-slate-100 p-0.5">
-                        <button type="button" @click="altViewMode = 'cards'" 
-                            class="px-2.5 py-1 text-xs font-bold transition-all flex items-center space-x-1"
-                            :class="altViewMode === 'cards' ? 'bg-black text-white' : 'text-slate-700 hover:text-black'">
-                            <i data-lucide="layout-grid" class="w-3.5 h-3.5 stroke-[2.5]"></i>
-                            <span>Kartu</span>
-                        </button>
-                        <button type="button" @click="altViewMode = 'table'" 
-                            class="px-2.5 py-1 text-xs font-bold transition-all flex items-center space-x-1"
-                            :class="altViewMode === 'table' ? 'bg-black text-white' : 'text-slate-700 hover:text-black'">
-                            <i data-lucide="table" class="w-3.5 h-3.5 stroke-[2.5]"></i>
-                            <span>Tabel</span>
-                        </button>
-                    </div>
-
-                    <!-- Add Alternative Button -->
-                    <button type="button" @click="openAddAlternativeModal()" class="neo-btn bg-lime-300 hover:bg-lime-400 text-black">
-                        <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
-                        <span>Tambah Laptop Baru</span>
+            <div x-show="activeTabStep1 === 'alternatives'" class="flex items-center space-x-2 w-full md:w-auto justify-end">
+                <!-- Toggle View Mode: Grid Cards vs Table -->
+                <div class="hidden sm:flex items-center border-2 border-black bg-slate-100 p-0.5">
+                    <button type="button" @click="altViewMode = 'cards'" 
+                        class="px-2.5 py-1 text-xs font-bold transition-all flex items-center space-x-1"
+                        :class="altViewMode === 'cards' ? 'bg-black text-white' : 'text-slate-700 hover:text-black'">
+                        <i data-lucide="layout-grid" class="w-3.5 h-3.5 stroke-[2.5]"></i>
+                        <span>Kartu</span>
+                    </button>
+                    <button type="button" @click="altViewMode = 'table'" 
+                        class="px-2.5 py-1 text-xs font-bold transition-all flex items-center space-x-1"
+                        :class="altViewMode === 'table' ? 'bg-black text-white' : 'text-slate-700 hover:text-black'">
+                        <i data-lucide="table" class="w-3.5 h-3.5 stroke-[2.5]"></i>
+                        <span>Tabel</span>
                     </button>
                 </div>
-            </template>
 
-            <template x-if="activeTabStep1 === 'criterias'">
-                <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
-                    <button type="button" @click="showScaleGuide = true" class="neo-btn-sm bg-white hover:bg-slate-100 text-black">
-                        <i data-lucide="help-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
-                        <span>Panduan Skala Lengkap</span>
-                    </button>
-                    <button type="button" @click="openAddCriteriaModal()" class="neo-btn bg-yellow-300 hover:bg-yellow-400 text-black">
-                        <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
-                        <span>Tambah Kriteria Baru</span>
-                    </button>
-                </div>
-            </template>
+                <!-- Add Alternative Button -->
+                <button type="button" @click="openAddAlternativeModal()" class="neo-btn bg-lime-300 hover:bg-lime-400 text-black">
+                    <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
+                    <span>Tambah Laptop Baru</span>
+                </button>
+            </div>
+
+            <div x-show="activeTabStep1 === 'criterias'" x-cloak class="flex items-center space-x-2 w-full md:w-auto justify-end">
+                <button type="button" @click="showScaleGuide = true" class="neo-btn-sm bg-white hover:bg-slate-100 text-black">
+                    <i data-lucide="help-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
+                    <span>Panduan Skala Lengkap</span>
+                </button>
+                <button type="button" @click="openAddCriteriaModal()" class="neo-btn bg-yellow-300 hover:bg-yellow-400 text-black">
+                    <i data-lucide="plus-circle" class="w-4 h-4 mr-1.5 stroke-[2.5]"></i>
+                    <span>Tambah Kriteria Baru</span>
+                </button>
+            </div>
         </div>
 
     </div>

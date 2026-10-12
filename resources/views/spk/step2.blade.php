@@ -14,7 +14,15 @@
                     :class="isTotalValid 
                         ? 'bg-lime-300 text-black' 
                         : 'bg-amber-300 text-black animate-pulse'">
-                    <i :data-lucide="isTotalValid ? 'check-circle-2' : 'alert-triangle'" class="w-4 h-4 stroke-[2.5]"></i>
+                    <svg x-show="isTotalValid" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                    <svg x-show="!isTotalValid" x-cloak class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
                     <span class="text-xs font-black uppercase">Total:</span>
                     <span class="text-sm font-black" x-text="totalWeightPercentage + '% (' + totalWeightDecimal.toFixed(2) + ')'"></span>
                 </div>
@@ -77,18 +85,20 @@
             <!-- Form Actions & Auto Normalize Button -->
             <div class="pt-4 border-t-2 border-black flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="text-xs font-bold text-slate-800">
-                    <template x-if="!isTotalValid">
-                        <span class="text-rose-700 flex items-center">
-                            <i data-lucide="alert-circle" class="w-4 h-4 mr-1 flex-shrink-0 stroke-[2.5]"></i>
-                            Total bobot harus tepat 100%. Tekan "Normalisasi Otomatis" untuk meratakan bobot secara proporsional.
-                        </span>
-                    </template>
-                    <template x-if="isTotalValid">
-                        <span class="text-black flex items-center">
-                            <i data-lucide="check" class="w-4 h-4 mr-1 flex-shrink-0 stroke-[3] text-black"></i>
-                            Total bobot valid 100% (1.0). Siap untuk kalkulasi SAW.
-                        </span>
-                    </template>
+                    <span x-show="!isTotalValid" x-cloak class="text-rose-700 flex items-center">
+                        <svg class="w-4 h-4 mr-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        Total bobot harus tepat 100%. Tekan "Normalisasi Otomatis" untuk meratakan bobot secara proporsional.
+                    </span>
+                    <span x-show="isTotalValid" class="text-black flex items-center">
+                        <svg class="w-4 h-4 mr-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Total bobot valid 100% (1.0). Siap untuk kalkulasi SAW.
+                    </span>
                 </div>
 
                 <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
